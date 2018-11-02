@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.BinarySearchST;
 
 public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Value> {
     private Node root;
-
+    private  int counter = 0;
     public BST() {
     }
 
@@ -224,14 +224,9 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
         return  height(root );
     }
 
-    private int  height(Node x ) {
-        int count = 0;
-        if (x != null){
-            count += height(x.left);
-            count += height(x.right);
-            count++;
-        }
-        return count;
+    private int  height(Node root ) {
+        if (root == null) return 0;
+        return 1 + Math.max(height(root.left), height(root.right));
     }
 
     public int numberofleaves(){
@@ -239,7 +234,7 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
     }
 
 
-    private int numberofleaves(Node root){
+    public int numberofleaves(Node root){
 
 
         if (root == null){
@@ -252,6 +247,42 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
 
 
         return numberofleaves(root.left) + numberofleaves(root.right);
+    }
+
+    public Key KthLargest (){
+        return KthLargest(root, 1).key;
+    }
+    private Node KthLargest(Node root, int k){
+        if (root == null) return null;
+        Node node = KthLargest(root.right,k);
+        if (k != counter){
+            counter++;
+            node = root;
+        }
+        if (counter == k){
+            return node;
+        }
+        else{
+           return KthLargest(root.left, k);
+        }
+    }
+
+    public Key KthSmallest (){
+        return KthSmallest(root, 1).key;
+    }
+    private Node KthSmallest(Node root, int k){
+        if (root == null) return null;
+        Node node = KthSmallest(root.left,k);
+        if (k != counter){
+            counter++;
+            node = root;
+        }
+        if (counter == k){
+            return node;
+        }
+        else{
+            return KthLargest(root.right, k);
+        }
     }
 
     private class Node {
@@ -282,15 +313,13 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
 ////        bst.put("zaid" , 5);
 //        System.out.println(bst.rank("ali"));
         BST<String , Integer> bst = new BST<>();
-        bst.put("omar",3);
+        bst.put("rashed",3);
         bst.put("ali",7);
         bst.put("ab" , 32);
         bst.put("mjali",8);
         bst.put("bani-essa",9);
         bst.put("zaid" , 5);
-        System.out.println(bst.numberofleaves()+"****");
-        bst.inorder();
-        bst.delete("ali");
+//        System.out.println(bst.KthLargest());
         System.out.println(bst.isBST());
 //
 //        bst.deleteMax();
