@@ -234,6 +234,26 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
         return count;
     }
 
+    public int numberofleaves(){
+        return numberofleaves(root);
+    }
+
+
+    private int numberofleaves(Node root){
+
+
+        if (root == null){
+            return  0;
+        }
+
+        if (root.right == null && root.left == null){
+            return  1;
+        }
+
+
+        return numberofleaves(root.left) + numberofleaves(root.right);
+    }
+
     private class Node {
         private Node left , right ;
         private Key key;
@@ -268,8 +288,9 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
         bst.put("mjali",8);
         bst.put("bani-essa",9);
         bst.put("zaid" , 5);
-
+        System.out.println(bst.numberofleaves()+"****");
         bst.inorder();
+        bst.delete("ali");
         System.out.println(bst.isBST());
 //
 //        bst.deleteMax();

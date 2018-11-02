@@ -28,9 +28,8 @@ public class Stacks  {
             int [] c = Arrays.copyOf(array, array.length/2);
             array =c;
         }
-        int data = array[--size];
 
-        return data;
+        return array[--size];
     }
     boolean isFull (){
         return size == array.length;

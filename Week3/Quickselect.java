@@ -4,14 +4,12 @@ import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Arrays;
 
-
-public class Quicksort {
-    static  int count = 0;
+public class Quickselect {
 
     public static void main(String[] args) {
-        int [] x = {2,3,4,1};
-        sort(x);
-        System.out.println(Arrays.toString(x));;
+        int [] c = {7, 10, 4, 3, 20, 15};
+        int kth = Rselect(c,0,c.length-1,5);
+        System.out.println(kth);
     }
 
     private static int partition (int[] a , int lo ,int hi ){
@@ -31,26 +29,31 @@ public class Quicksort {
             }
             if (i >= j) break;
             swap(a,i,j);
-            count ++;
 
         }
 
         swap(a,lo,j);
         return j;
     }
+    static int Rselect(int [] x,int l, int hi, int i){
+        int j = partition(x,l,hi);
+        if (x.length == 1) return x[0];
 
-    private static void sort (int [] a , int lo, int hi){
-        if (hi <= lo) return;
-        int partition = partition(a,lo,hi);
-        sort(a,lo,partition-1);
-        sort(a,partition+1,hi);
+        else{
+
+            if (j == i){
+                return x[j];
+            }
+            else if (j > i){
+                return Rselect(x,l,j,i);
+            }
+            else{
+                return Rselect(x,j+1,hi,i);
+            }
+        }
 
     }
 
-    public static void sort(int [] a){
-        StdRandom.shuffle(a);
-        sort(a,0,a.length-1);
-    }
 
     private static boolean less(int v, int w) {
         return v < w;
@@ -60,5 +63,6 @@ public class Quicksort {
         a[lo] = a[high];
         a[high] = temp;
     }
+
 
 }

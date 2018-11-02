@@ -12,15 +12,15 @@ public class main {
         players[2] = new Players("Marwan" , 230,73);
 //        Merge.sort(players);
 //
-        Merge_sort.merge_sort(players);
+//        Merge_sort.merge_sort(players);
         for (Players players1 : players){
             System.out.println(players1.getGoals() +" " +" "+  players1.getName()  +" "+ players1.getNumbers());
         }
-        ////////////////////////////////////////////////////////////////
-        Quicksort.sort(players);
-        for (Players players1 : players){
-            System.out.println(players1.getGoals() +" " +" "+  players1.getName()  +" "+ players1.getNumbers());
-        }
+//        ////////////////////////////////////////////////////////////////
+//        Quicksort.sort(players);
+//        for (Players players1 : players){
+//            System.out.println(players1.getGoals() +" " +" "+  players1.getName()  +" "+ players1.getNumbers());
+//        }
     }
 
 }
