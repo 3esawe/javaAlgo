@@ -285,6 +285,20 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
         }
     }
 
+    public boolean isSymmetric(){
+        return isMirror(root, root);
+    }
+
+    private boolean isMirror(Node root, Node root1){
+        if (root == null && root1 == null) return true;
+
+        if (root != null && root1 != null && root.key == root1.key){
+            return (isMirror(root.left, root1.right) && isMirror(root.right, root1.left));
+        }
+
+        return false;
+    }
+
     private class Node {
         private Node left , right ;
         private Key key;
@@ -305,13 +319,7 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
     }
 
     public static void main(String[] args) {
-//        edu.princeton.cs.algs4.BST<String , Integer> bst = new edu.princeton.cs.algs4.BST<String , Integer>();
-////        bst.put("omar",3);
-////        bst.put("ali",7);
-////        bst.put("mjali",8);
-////        bst.put("bani-essa",9);
-////        bst.put("zaid" , 5);
-//        System.out.println(bst.rank("ali"));
+
         BST<String , Integer> bst = new BST<>();
         bst.put("rashed",3);
         bst.put("ali",7);
@@ -319,14 +327,7 @@ public class BST <Key extends Comparable<Key> , Value> implements  IBST<Key,Valu
         bst.put("mjali",8);
         bst.put("bani-essa",9);
         bst.put("zaid" , 5);
-//        System.out.println(bst.KthLargest());
-        System.out.println(bst.isBST());
-//
-//        bst.deleteMax();
-//        bst.inorder()
-//        System.out.println(bst.max());
-//        System.out.println(bst.height());
-//        System.out.println(bst.size());
-//        bst.inorder();
+        System.out.println(bst.isSymmetric());
+
     }
 }
